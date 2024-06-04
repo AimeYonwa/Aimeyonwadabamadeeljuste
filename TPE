@@ -1,4 +1,4 @@
-1) let rec hanoi dep au destinataire n =
+1-) let rec hanoi dep au destinataire n =
   if n > 0 then begin
     (* Déplacer n-1 disques de dep à au en utilisant destinataire comme piquet auxiliaire *)
     hanoi dep destinataire au (n - 1);
@@ -16,7 +16,7 @@ let () = hanoi "A" "B" "C" 5
 
 
 
-2) let hanoi n =
+2-) let hanoi n =
   let rec hanoi_aux dep au destinataire n =
     if n > 0 then begin
       (* Déplacer n-1 disques de dep à au en utilisant destinataire comme piquet auxiliaire *)
@@ -36,7 +36,7 @@ let () = hanoi 5
 
 
 
-3) let hanoi n =
+3-) let hanoi n =
   let rec hanoi_aux dep au destinataire n =
     if n > 0 then begin
       (* Déplacer n-1 disques de dep à au en utilisant destinataire comme piquet auxiliaire *)
