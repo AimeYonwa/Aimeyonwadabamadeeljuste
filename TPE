@@ -1,0 +1,70 @@
+1) let rec hanoi dep au destinataire n =
+  if n > 0 then begin
+    (* Déplacer n-1 disques de dep à au en utilisant destinataire comme piquet auxiliaire *)
+    hanoi dep destinataire au (n - 1);
+    (* Déplacer le disque n de dep à destinataire *)
+    Printf.printf "%s -> %s\n" dep destinataire;
+    (* Déplacer n-1 disques de au à destinataire en utilisant dep comme piquet auxiliaire *)
+    hanoi au dep destinataire (n - 1);
+  end
+
+(* Appel de la fonction pour n = 5 *)
+let () = hanoi "A" "B" "C" 5
+
+
+
+
+
+
+2) let hanoi n =
+  let rec hanoi_aux dep au destinataire n =
+    if n > 0 then begin
+      (* Déplacer n-1 disques de dep à au en utilisant destinataire comme piquet auxiliaire *)
+      hanoi_aux dep destinataire au (n - 1);
+      (* Déplacer le disque n de dep à destinataire *)
+      Printf.printf "%s -> %s\n" dep destinataire;
+      (* Déplacer n-1 disques de au à destinataire en utilisant dep comme piquet auxiliaire *)
+      hanoi_aux au dep destinataire (n - 1);
+    end
+  in
+  hanoi_aux "A" "B" "C" n
+
+(* Appel de la fonction pour n = 5 *)
+let () = hanoi 5
+
+
+
+
+
+3) let hanoi n =
+  let rec hanoi_aux dep au destinataire n =
+    if n > 0 then begin
+      (* Déplacer n-1 disques de dep à au en utilisant destinataire comme piquet auxiliaire *)
+      hanoi_aux dep destinataire au (n - 1);
+      (* Déplacer le disque n de dep à destinataire *)
+      Printf.printf "%s -> %s\n" dep destinataire;
+      (* Déplacer n-1 disques de au à destinataire en utilisant dep comme piquet auxiliaire *)
+      hanoi_aux au dep destinataire (n - 1);
+    end
+  in
+  hanoi_aux "A" "B" "C" n
+
+(* Mesurer le temps pris par la fonction hanoi pour s'exécuter *)
+let measure_time n =
+  let start_time = Sys.time () in
+  hanoi n;
+  let end_time = Sys.time () in
+  let elapsed_time = end_time -. start_time in
+  Printf.printf "Temps écoulé pour n=%d : %f secondes\n" n elapsed_time;
+  elapsed_time
+
+(* Déterminer la valeur de n pour laquelle le temps dépasse 10 secondes *)
+let rec find_n_exceeding_time limit n =
+  let elapsed_time = measure_time n in
+  if elapsed_time > limit then n
+  else find_n_exceeding_time limit (n + 1)
+
+let () =
+  let limit = 10.0 in
+  let n_exceeding = find_n_exceeding_time limit 1 in
+  Printf.printf "La valeur de n à partir de laquelle le temps dépasse %f secondes est %d\nx
